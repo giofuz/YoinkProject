@@ -37,7 +37,7 @@ public class MapsActivity extends FragmentActivity implements
         setUpMapIfNeeded();
 
         //To connect to the API, you need to create an instance of the Google Play services API client.
-        //For details about using the client, see the guide to Accessing Google APIs.
+        //For details about using the client, see the guide to Accessing Google APIs. ,mkmklmk
         GoogleApiClient client = new GoogleApiClient.Builder(this)
                 .addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN)

@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">Yoink</string>
     <string name="course_name">Yoink</string>
-    <string name="hello_world">This is the start of something big...</string>
+    <string name="hello_world">Deals will go here..</string>
     <string name="action_settings">Settings</string>
     <string name="image_resource">Resource</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_maps">Map</string>
+    <string name="yoink">Yoink</string>
+    <string name="favourite_title">favourite title</string>
 </resources>

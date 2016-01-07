@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Iadt"
+        android:text="@string/yoink"
         android:gravity="center"
         android:textSize="24sp"
         android:id="@+id/headline1"
