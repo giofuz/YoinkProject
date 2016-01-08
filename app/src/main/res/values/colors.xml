@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primary">#008080</color>
+    <color name="common_action_bar_splitter">#008080</color>
+    <color name="action_bar">#00b3b3</color>
+    <color name="menu_text_color">#dddddd</color>
 </resources>
