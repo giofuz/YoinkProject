@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+/**
+ * Created by Giovanni Fusciardi & Luke Doolin for 3rd year project
+ IADT multimedia programming on 08/01/16.
+ */
 
 public class RegisterActivity extends AppCompatActivity {
 

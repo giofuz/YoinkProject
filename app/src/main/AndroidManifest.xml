@@ -24,15 +24,35 @@
             android:name=".RegisterActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/course_name" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
+
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.default" />
+                <!--<category android:name="android.intent.category.default" />-->
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".SettingsActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/settings_name" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.cyncyn.YoinkProject.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".SavedListActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/saved_list_name" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.cyncyn.YoinkProject.MainActivity" />
         </activity>
 
         <activity android:name=".splashActivity">
@@ -51,6 +71,9 @@
         <activity
             android:name="com.example.cyncyn.YoinkProject.MapsActivity"
             android:label="@string/title_activity_maps" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.cyncyn.YoinkProject.MainActivity" />
         </activity>
     </application>
 

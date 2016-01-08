@@ -10,6 +10,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+/**
+ * Created by Giovanni Fusciardi & Luke Doolin for 3rd year project
+ IADT multimedia programming.
+ */
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -44,12 +49,20 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent registerIntent = new Intent(this, SettingsActivity.class);
+            startActivity(registerIntent);
         }
 
-        if (id == R.id.action_map_icon) {
+        if (id == R.id.action_map) {
 
             Intent registerIntent = new Intent(this, MapsActivity.class);
+            startActivity(registerIntent);
+
+        }
+
+        if (id == R.id.action_saved_list) {
+
+            Intent registerIntent = new Intent(this,SavedListActivity.class);
             startActivity(registerIntent);
 
         }

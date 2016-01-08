@@ -6,14 +6,14 @@ import android.view.Menu;
 
 /**
  * Created by Giovanni Fusciardi & Luke Doolin for 3rd year project
- IADT multimedia programming on 08/01/16.
+ * IADT multimedia programming on 08/01/16.
  */
-public class SavedListActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_saved_list);
+        setContentView(R.layout.activity_settings);
 
 //        ActionBar actionBar = getSupportActionBar();
 //        actionBar.setDisplayHomeAsUpEnabled(true);
@@ -31,5 +31,4 @@ public class SavedListActivity extends AppCompatActivity {
 //        mif.inflate(R.menu.menu_main, menu);
 //        return super.onCreateOptionsMenu(menu);
     }
-
 }

@@ -18,6 +18,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.plus.Plus;
 
+/**
+ * Created by Giovanni Fusciardi & Luke Doolin for 3rd year project
+ IADT multimedia programming on 08/01/16.
+ */
 
 public class MapsActivity extends FragmentActivity implements
         GoogleApiClient.ConnectionCallbacks,

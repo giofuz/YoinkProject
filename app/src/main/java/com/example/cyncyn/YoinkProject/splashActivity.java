@@ -8,8 +8,10 @@ import android.view.Window;
 import android.view.WindowManager;
 
 /**
- * Created by Gio on 08/01/16.
+ * Created by Giovanni Fusciardi & Luke Doolin for 3rd year project
+ IADT multimedia programming on 08/01/16.
  */
+
 public class splashActivity extends Activity {
 
     private static String TAG = splashActivity.class.getName();
