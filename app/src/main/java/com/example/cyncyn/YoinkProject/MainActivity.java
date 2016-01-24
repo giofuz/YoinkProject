@@ -2,13 +2,12 @@ package com.example.cyncyn.YoinkProject;
 
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toolbar;
 
 /**
  * Created by Giovanni Fusciardi & Luke Doolin for 3rd year project
@@ -18,14 +17,14 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity {
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-//        actionBar.setIcon(R.drawable.mark1);
+//        Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
+//        setSupportActionBar(myToolbar);
 
     }
 
@@ -62,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.action_saved_list) {
 
-            Intent registerIntent = new Intent(this,SavedListActivity.class);
+            Intent registerIntent = new Intent(this,LoginActivity.class);
             startActivity(registerIntent);
 
         }
@@ -70,14 +69,27 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
     public void btnClickHandler(View view) {
-//        Intent registerIntent = new Intent(this, MapsActivity.class);
-//
-//        startActivity(registerIntent);
+
+        Intent registerIntent = new Intent(this, MapsActivity.class);
+        startActivity(registerIntent);
 
     }
 
-//    @Override
+    public void btnClickHandler2(View view) {
+
+        Intent registerIntent = new Intent(this, DealActivity.class);
+        startActivity(registerIntent);
+
+    }
+
+
+
+
+
+    //    @Override
 //    public void onConnected(Bundle connectionHint) {
 //        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
 //                mGoogleApiClient);

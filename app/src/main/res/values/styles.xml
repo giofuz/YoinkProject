@@ -1,9 +1,31 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:colorPrimary">@color/primary</item>
-        <item name="android:colorPrimaryDark">@color/common_action_bar_splitter</item>
+        <item name="android:colorPrimary" tools:targetApi="lollipop">@color/primary</item>
+        <item name="android:colorPrimaryDark" tools:targetApi="lollipop">@color/common_action_bar_splitter</item>
+        <item name="android:actionBarStyle">@color/action_bar</item>
+        <item name="android:actionBarTabBarStyle">@color/action_bar</item>
     </style>
 
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
+
+
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="colorAccent">#fff</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+    <style name="RobotoAutoCompleteTextViewStyle" parent="android:Widget.AutoCompleteTextView">
+        <item name="colorAccent">#fff</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+    <style name="RobotoEditTextStyle" parent="android:Widget.EditText">
+        <item name="colorAccent">#fff</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+    <color name="accent">#ffffff</color>
 </resources>

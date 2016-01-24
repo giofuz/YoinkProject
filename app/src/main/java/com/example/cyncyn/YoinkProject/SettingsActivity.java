@@ -27,8 +27,5 @@ public class SettingsActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
 
-//        MenuInflater mif = getMenuInflater();
-//        mif.inflate(R.menu.menu_main, menu);
-//        return super.onCreateOptionsMenu(menu);
     }
 }

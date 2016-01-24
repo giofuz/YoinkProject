@@ -1,172 +1,235 @@
 package com.example.cyncyn.YoinkProject;
 
-import android.content.IntentSender;
-import android.location.Location;
+import android.app.Dialog;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.drive.Drive;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.plus.Plus;
 
-/**
- * Created by Giovanni Fusciardi & Luke Doolin for 3rd year project
- IADT multimedia programming on 08/01/16.
- */
+import java.io.IOException;
+import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements
-        GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+public class MapsActivity extends AppCompatActivity {
 
-    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    private GoogleApiClient mGoogleApiClient;
-    public static final String TAG = MapsActivity.class.getSimpleName();
-    private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
-    private LocationRequest mLocationRequest;
+    private static final int GPS_ERRORDIALOG_REQUEST = 9001;
+    @SuppressWarnings("unused")
+    private static final int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9002;
+    GoogleMap mMap;
+    private static final float DEFAULTZOOM = 15;
+    Marker marker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
-        setUpMapIfNeeded();
 
-        //To connect to the API, you need to create an instance of the Google Play services API client.
-        //For details about using the client, see the guide to Accessing Google APIs.
-        GoogleApiClient client = new GoogleApiClient.Builder(this)
-                .addApi(Plus.API)
-                .addScope(Plus.SCOPE_PLUS_LOGIN)
-                .setAccountName("users.account.name@gmail.com")
-            .build();
-        client.connect();
+        if (servicesOK()) {
+            setContentView(R.layout.activity_maps);
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
+            if (initMap()) {
+                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-        // Create the LocationRequest object
-        mLocationRequest = LocationRequest.create()
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(10 * 1000)        // 10 seconds, in milliseconds
-                .setFastestInterval(1 * 1000); // 1 second, in milliseconds
+                    return;
+                }
+               mMap.setMyLocationEnabled(true);
+            }
+            else {
+                Toast.makeText(this, "Map not available!", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            setContentView(R.layout.activity_main);
+        }
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.maps_menu, menu);
+        return true;
+    }
+
+    public boolean servicesOK()  {
+        int isAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+
+        if (isAvailable == ConnectionResult.SUCCESS) {
+            return true;
+        }
+        else if (GooglePlayServicesUtil.isUserRecoverableError(isAvailable)) {
+            Dialog dialog = GooglePlayServicesUtil.getErrorDialog(isAvailable, this, GPS_ERRORDIALOG_REQUEST);
+            dialog.show();
+        }
+        else {
+            Toast.makeText(this, "Can't connect to Google Play services", Toast.LENGTH_SHORT).show();
+        }
+        return false;
+    }
+
+    private boolean initMap() {
+        if (mMap == null) {
+            SupportMapFragment mapFragment =
+                    (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+            mMap = mapFragment.getMap();
+
+            if(mMap != null){
+                mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                    @Override
+                    public View getInfoWindow(Marker marker) {
+                        return null;
+                    }
+
+                    @Override
+                    public View getInfoContents(Marker marker) {
+                        View v = getLayoutInflater().inflate(R.layout.info_window,null);
+                        TextView tvLocality = (TextView) v.findViewById(R.id.tv_locality);
+                        TextView tvLat = (TextView) v.findViewById(R.id.tv_lat);
+                        TextView tvLng = (TextView) v.findViewById(R.id.tv_lng);
+                        TextView tvSnippet = (TextView) v.findViewById(R.id.tv_snippet);
+
+                        LatLng ll = marker.getPosition();
+
+                        tvLocality.setText(marker.getTitle());
+                        tvLat.setText("Latitude: " + ll.latitude);
+                        tvLng.setText("Longitude: " + ll.longitude);
+                        tvSnippet.setText(marker.getSnippet());
+
+
+                        return v;
+                    }
+                });
+
+//                mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+//                    @Override
+//                    public void onMapLongClick(LatLng ll) {
+//                        Geocoder gc = new Geocoder(MapsActivity.this);
+//                        List<Address> list = null;
+//
+//                        try {
+//                            list = gc.getFromLocation(ll.latitude, ll.longitude, 1);
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                            return;
+//                        }
+//                        Address add = list.get(0);
+//                        MapsActivity.this.setMarker(add.getLocality(), add.getCountryName(),
+//                                ll.latitude, ll.longitude);
+//                    }
+//                });
+            }
+        }
+        return (mMap != null);
+    }
+
+
+    private void gotoLocation(double lat, double lng,
+                              float zoom) {
+        LatLng ll = new LatLng(lat, lng);
+        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(ll, zoom);
+        mMap.moveCamera(update);
+    }
+
+    public void geoLocate(View v) throws IOException {
+
+        hideSoftKeyboard(v);
+
+        TextView tv = (TextView) findViewById(R.id.editText1);
+        String searchString = tv.getText().toString();
+
+        Geocoder gc = new Geocoder(this);
+        List<Address> list = gc.getFromLocationName(searchString, 1);
+
+        if (list.size() > 0) {
+            Address add = list.get(0);
+            double lat = add.getLatitude();
+            double lng = add.getLongitude();
+            gotoLocation(lat, lng, 15);
+
+            if (marker != null) {
+                marker.remove();
+            }
+
+            setMarker(add, lat, lng);
+        }
+
+    }
+
+//    public void geoLocate() throws IOException {
+//
+//        TextView view = (TextView) findViewById(R.id.editText1);
+//        String location = view.getText().toString();
+//
+//        Geocoder gc = new Geocoder(this);
+//        List<Address> list = gc.getFromLocationName(location, 1);
+//        Address add = list.get(0);
+//        String locality = add.getLocality();
+//
+//        String i= location;
+//        view.setText(i);
+//
+//    }
+
+    private void hideSoftKeyboard(View v) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        MapStateManager mgr = new MapStateManager(this);
+        mgr.saveMapState(mMap);
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
-        setUpMapIfNeeded();
-        mGoogleApiClient.connect();
-    }
+        MapStateManager mgr = new MapStateManager(this);
+        CameraPosition position = mgr.getSavedCameraPosition();
+        if (position != null) {
+            CameraUpdate update = CameraUpdateFactory.newCameraPosition(position);
+            mMap.moveCamera(update);
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (mGoogleApiClient.isConnected()) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-            mGoogleApiClient.disconnect();
-        }
-    }
-    /**
-     * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
-     * installed) and the map has not already been instantiated.. This will ensure that we only ever
-     * call {@link #setUpMap()} once when {@link #mMap} is not null.
-     * <p/>
-     * If it isn't installed {@link SupportMapFragment} (and
-     * {@link com.google.android.gms.maps.MapView MapView}) will show a prompt for the user to
-     * install/update the Google Play services APK on their device.
-     * <p/>
-     * A user can return to this FragmentActivity after following the prompt and correctly
-     * installing/updating/enabling the Google Play services. Since the FragmentActivity may not
-     * have been completely destroyed during this process (it is likely that it would only be
-     * stopped or paused), {@link #onCreate(Bundle)} may not be called again so we should call this
-     * method in {@link #onResume()} to guarantee that it will be called.
-     */
-    private void setUpMapIfNeeded() {
-        // Do a null check to confirm that we have not already instantiated the map.
-        if (mMap == null) {
-            // Try to obtain the map from the SupportMapFragment.
-            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                    .getMap();
-            // Check if we were successful in obtaining the map.
-            if (mMap != null) {
-                setUpMap();
-            }
+            mMap.setMapType(mgr.getSavedMapType());
         }
     }
 
-    /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
-     * <p/>
-     * This should only be called once and when we are sure that {@link #mMap} is not null.
-     */
-    private void setUpMap() {
-        //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+    protected void gotoCurrentLocation() {
+
     }
 
-    @Override
-    public void onConnected(Bundle bundle) {
-        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        if (location == null) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-        }
-        else {
-            handleNewLocation(location);
-        }
-    }
-
-    private void handleNewLocation(Location location) {
-
-        Log.d(TAG, location.toString());
-
-        double currentLatitude = location.getLatitude();
-        double currentLongitude = location.getLongitude();
-
-        LatLng latLng = new LatLng(currentLatitude, currentLongitude);
-
-        //mMap.addMarker(new MarkerOptions().position(new LatLng(currentLatitude, currentLongitude)).title("Current Location"));
+    public void setMarker(Address add, double lat, double lng) {
         MarkerOptions options = new MarkerOptions()
-                .position(latLng)
-                .title("I am here!");
-        mMap.addMarker(options);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                .title(add.getLocality())
+                .position(new LatLng(lat, lng))
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_action_location));
 
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-        Log.i(TAG, "Location services suspended. Please reconnect.");
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-        if (connectionResult.hasResolution()) {
-            try {
-                // Start an Activity that tries to resolve the error
-                connectionResult.startResolutionForResult(this, CONNECTION_FAILURE_RESOLUTION_REQUEST);
-            } catch (IntentSender.SendIntentException e) {
-                e.printStackTrace();
-            }
-        } else {
-            Log.i(TAG, "Location services connection failed with code " + connectionResult.getErrorCode());
+        String country = add.getCountryName();
+        if (country.length() > 0) {
+            options.snippet(country);
         }
+
+        marker = mMap.addMarker(options);
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        handleNewLocation(location);
-    }
+
 }
+

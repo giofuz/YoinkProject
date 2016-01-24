@@ -1,8 +1,10 @@
 package com.example.cyncyn.YoinkProject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.View;
 
 /**
  * Created by Giovanni Fusciardi & Luke Doolin for 3rd year project
@@ -30,6 +32,13 @@ public class SavedListActivity extends AppCompatActivity {
 //        MenuInflater mif = getMenuInflater();
 //        mif.inflate(R.menu.menu_main, menu);
 //        return super.onCreateOptionsMenu(menu);
+    }
+
+    public void btnClickHandler(View view) {
+
+        Intent registerIntent = new Intent(this, MapsActivity.class);
+        startActivity(registerIntent);
+
     }
 
 }
