@@ -3,6 +3,8 @@ package com.example.cyncyn.YoinkProject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +27,16 @@ public class MainActivity extends AppCompatActivity {
 
 //        Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
 //        setSupportActionBar(myToolbar);
+
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
+
+        if (fragment == null) {
+            fragment = new DealListFragment();
+            fm.beginTransaction()
+                    .add(R.id.fragmentContainer, fragment)
+                    .commit();
+        }
 
     }
 

@@ -27,4 +27,9 @@
     <string name="invalid_password">Password is too short</string>
     <string name="incorrect_password">Password is incorrect</string>
     <string name="field_required">This field is required</string>
+    <string name="Descrpt_title_label">Deal</string>
+    <string name="descrpt_hint">Deal</string>
+    <string name="category_label">Category</string>
+    <string name="category_hint">Category</string>
+    <string name="biz_hint">business Name</string>
 </resources>
