@@ -2,6 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.cyncyn.YoinkProject.MainActivity">
+    <!--<item android:id="@+id/logo"-->
+        <!--android:title="@string/title_activity_main"-->
+        <!--android:icon="@mipmap/yoink_trans_logo"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:gravity="center"-->
+        <!--app:showAsAction="always" />-->
+
     <item android:id="@+id/action_map"
         android:title="@string/title_activity_maps"
         android:icon="@drawable/ic_action_map"

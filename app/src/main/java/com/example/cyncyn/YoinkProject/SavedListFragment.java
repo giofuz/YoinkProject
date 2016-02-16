@@ -1,5 +1,9 @@
 package com.example.cyncyn.YoinkProject;
 
+/**
+ * Created by Giovanni Fusciardi & Luke Doolin for 3rd year project
+ * IADT multimedia programming on 08/02/16.
+ */
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,10 +23,11 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DealListFragment extends ListFragment {
-    //private static final String API_URL = "http://192.168.1.24:80/DealWebApp/api/";
-    private final String API_URL = "http://www.yoink.netne.net/api/";
+public class SavedListFragment extends ListFragment {
+    public static String KEY_USERNAME;
+    private final String API_URL = "http://192.168.1.24:80/DealWebApp/api/";
     private final String TAG = "DealWebApp";
+    private String mUserName;
 
     private List<Deal> mDeals;
 
@@ -52,17 +57,24 @@ public class DealListFragment extends ListFragment {
             onHttpResponse(response);
         }
     }
-    
+
     public void onCreate(Bundle savedInstanceState) {
-    	super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
         String urlString = null;
         URI uri;
         HttpRequest request;
         HttpRequestTask t;
 
+        if(getArguments() != null){
+            mUserName = getArguments().getString(KEY_USERNAME);
+        }
+        else {
+            mUserName = null;
+        }
+
         try {
-            urlString = API_URL + "/Deal";
+            urlString = API_URL + "/SavedList/" + mUserName;
             uri = new URI(urlString);
 
             request = new HttpRequest("GET", uri);
@@ -82,9 +94,9 @@ public class DealListFragment extends ListFragment {
         i.putExtra(DealActivity.EXTRA_DEAL_ID, b.getId());
         startActivity(i);
     }
-    
+
     public void onHttpResponse(HttpResponse response) {
-		JSONArray jsonArray;
+        JSONArray jsonArray;
         JSONObject jsonObject;
         Deal deal;
 
@@ -101,8 +113,8 @@ public class DealListFragment extends ListFragment {
                         String description = jsonObject.getString("deal_description");
                         String category = jsonObject.getString("deal_category");
                         String businessName = jsonObject.getString("business_name");
-                        double latitude = jsonObject.getDouble("business_lat");
-                        double longitude = jsonObject.getDouble("business_long");
+                        double latitude = jsonObject.getDouble("deal_lat");
+                        double longitude = jsonObject.getDouble("deal_lng");
 
                         deal = new Deal(id, description, category, businessName, latitude, longitude);
 
@@ -117,7 +129,7 @@ public class DealListFragment extends ListFragment {
                 DealStore store = DealStore.getInstance();
                 store.setDeals(mDeals);
 
-                ListAdapter adapter = new DealListAdapter(getActivity(), mDeals);
+                ListAdapter adapter = new SavedListAdapter(getActivity(), mDeals);
 
                 setListAdapter(adapter);
             }

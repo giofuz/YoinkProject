@@ -15,8 +15,8 @@
         android:layout_height="wrap_content"
         android:text="@string/Descrpt_title_label" />
 
-    <EditText
-        android:id="@+id/book_title_editText"
+    <TextView
+        android:id="@+id/deal_desc_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/descrpt_hint"
@@ -35,8 +35,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/book_firstname_editText"
+        <TextView
+            android:id="@+id/deal_cat_editText"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -57,8 +57,8 @@
         android:text="@string/biz_hint" />
 
 
-    <EditText
-        android:id="@+id/book_year_editText"
+    <TextView
+        android:id="@+id/deal_biz_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/biz_hint"

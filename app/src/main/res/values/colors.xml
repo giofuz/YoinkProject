@@ -3,8 +3,9 @@
     <color name="primary">#009090</color>
     <color name="common_action_bar_splitter">#008080</color>
     <color name="action_bar">#00b3b3</color>
-    <color name="menu_text_color">#dddddd</color>
+    <color name="menu_text_color">#009090</color>
     <color name="teal">#009090</color>
     <color name="white">#fff</color>
+    <color name="black_text">#000</color>
 
 </resources>

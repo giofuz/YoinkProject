@@ -1,5 +1,9 @@
 package com.example.cyncyn.YoinkProject;
 
+/**
+ * Created by Giovanni Fusciardi & Luke Doolin for 3rd year project
+ * IADT multimedia programming on 06/02/16.
+ */
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,12 +23,11 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DealListFragment extends ListFragment {
-    //private static final String API_URL = "http://192.168.1.24:80/DealWebApp/api/";
-    private final String API_URL = "http://www.yoink.netne.net/api/";
+public class UserListFragment extends ListFragment {
+    private final String API_URL = "http://192.168.1.24/DealWebApp/api/";
     private final String TAG = "DealWebApp";
 
-    private List<Deal> mDeals;
+    private List<User> mUsers;
 
     private class HttpRequestTask extends AsyncTask<HttpRequest, Integer, HttpResponse> {
 
@@ -52,9 +55,9 @@ public class DealListFragment extends ListFragment {
             onHttpResponse(response);
         }
     }
-    
+
     public void onCreate(Bundle savedInstanceState) {
-    	super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
         String urlString = null;
         URI uri;
@@ -62,7 +65,7 @@ public class DealListFragment extends ListFragment {
         HttpRequestTask t;
 
         try {
-            urlString = API_URL + "/Deal";
+            urlString = API_URL + "/users";
             uri = new URI(urlString);
 
             request = new HttpRequest("GET", uri);
@@ -82,31 +85,28 @@ public class DealListFragment extends ListFragment {
         i.putExtra(DealActivity.EXTRA_DEAL_ID, b.getId());
         startActivity(i);
     }
-    
+
     public void onHttpResponse(HttpResponse response) {
-		JSONArray jsonArray;
+        JSONArray jsonArray;
         JSONObject jsonObject;
-        Deal deal;
+        User user;
 
         if (response != null) {
             if (response.getStatus() == 200) {
                 String body = response.getBody();
                 try {
                     jsonArray = new JSONArray(body);
-                    mDeals = new ArrayList<Deal>();
+                    mUsers = new ArrayList<User>();
                     for (int i = 0; i != jsonArray.length(); i++) {
                         jsonObject = jsonArray.getJSONObject(i);
 
                         int id = jsonObject.getInt("dealId");
-                        String description = jsonObject.getString("deal_description");
-                        String category = jsonObject.getString("deal_category");
-                        String businessName = jsonObject.getString("business_name");
-                        double latitude = jsonObject.getDouble("business_lat");
-                        double longitude = jsonObject.getDouble("business_long");
+                        String username = jsonObject.getString("username");
+                        String password = jsonObject.getString("password");
 
-                        deal = new Deal(id, description, category, businessName, latitude, longitude);
+                        user = new User(id, username, password);
 
-                        mDeals.add(deal);
+                        mUsers.add(user);
                     }
                 }
                 catch (JSONException e) {
@@ -114,12 +114,6 @@ public class DealListFragment extends ListFragment {
                     Toast.makeText(this.getActivity(), message, Toast.LENGTH_LONG).show();
                 }
 
-                DealStore store = DealStore.getInstance();
-                store.setDeals(mDeals);
-
-                ListAdapter adapter = new DealListAdapter(getActivity(), mDeals);
-
-                setListAdapter(adapter);
             }
             else {
                 Log.d(TAG, "Http Response: " + response.getStatus() + " " + response.getDescription());

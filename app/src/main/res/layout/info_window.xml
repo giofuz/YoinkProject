@@ -8,7 +8,7 @@
         android:id="@+id/imageView1"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/ic_action_location"
+        android:src="@mipmap/yoink_trans_logo"
         android:contentDescription="@string/map_info" />
 
     <LinearLayout
@@ -17,24 +17,19 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/tv_locality"
+            android:id="@+id/tv_Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_lat"
+            android:id="@+id/tv_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/tv_lng"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/tv_snippet"
+            android:id="@+id/tv_deal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

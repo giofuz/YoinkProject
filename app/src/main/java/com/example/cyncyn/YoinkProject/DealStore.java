@@ -2,9 +2,7 @@ package com.example.cyncyn.YoinkProject;
 
 import java.util.List;
 
-/**
- * Created by dempseyj on 19/01/2016.
- */
+
 public class DealStore {
 
     private static DealStore instance = null;
@@ -24,7 +22,7 @@ public class DealStore {
         return mDeals;
     }
 
-    public void setBooks(List<Deal> mDeals) {
+    public void setDeals(List<Deal> mDeals) {
         this.mDeals = mDeals;
     }
 }

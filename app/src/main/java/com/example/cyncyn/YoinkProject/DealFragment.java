@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -14,15 +15,15 @@ public class DealFragment extends Fragment {
     private static final String FRAGMENT_DEAL_ID = "dealId";
 
     private int mDealId;
-    private EditText mDescrptField;
-    private EditText mCategoryField;
-    private EditText mBizIdField;
+    private TextView mDescrptField;
+    private TextView mCategoryField;
+    private TextView mBusinessName;
     private Deal mDeal;
 
-    public static DealFragment newInstance(int bookId) {
+    public static DealFragment newInstance(int dealId) {
         DealFragment fragment = new DealFragment();
         Bundle args = new Bundle();
-        args.putInt(FRAGMENT_DEAL_ID, bookId);
+        args.putInt(FRAGMENT_DEAL_ID, dealId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,16 +50,16 @@ public class DealFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View fragment = inflater.inflate(R.layout.fragment_book, container, false);
+        View fragment = inflater.inflate(R.layout.fragment_deal, container, false);
 
-        mDescrptField = (EditText) fragment.findViewById(R.id.book_title_editText);
-        mCategoryField = (EditText) fragment.findViewById(R.id.book_firstname_editText);
-        mBizIdField = (EditText) fragment.findViewById(R.id.book_year_editText);
+        mDescrptField = (TextView) fragment.findViewById(R.id.deal_desc_editText);
+        mCategoryField = (TextView) fragment.findViewById(R.id.deal_cat_editText);
+        mBusinessName = (TextView) fragment.findViewById(R.id.deal_biz_editText);
 
         if (mDeal != null) {
             mDescrptField.setText(mDeal.getDescription());
             mCategoryField.setText(mDeal.getCategory());
-            //mBizIdField.setText(mDeal.getBusinessId());
+            mBusinessName.setText(mDeal.getBusinessName());
         }
 
         return fragment;

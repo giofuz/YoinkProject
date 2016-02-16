@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.cyncyn.YoinkProject.MainActivity">
+    <!--<item android:id="@+id/logo"-->
+    <!--android:title="@string/title_activity_main"-->
+    <!--android:icon="@mipmap/yoink_trans_logo"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:gravity="center"-->
+    <!--app:showAsAction="always" />-->
+
+
+    <!--<item android:id="@+id/saved_list_settings"-->
+        <!--android:title="@string/action_saved_list"-->
+        <!--android:icon="@drawable/ic_action_settings"-->
+        <!--app:showAsAction="always" />-->
+
+    <item
+        android:id="@+id/saved_list_settings"
+        android:title="@string/logout"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/saved_list_delete"
+        android:title="delete all deals"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+</menu>

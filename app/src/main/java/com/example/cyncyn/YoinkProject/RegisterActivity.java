@@ -1,36 +1,91 @@
 package com.example.cyncyn.YoinkProject;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
  * Android login screen Activity
  */
-public class RegisterActivity extends Activity  {
+public class RegisterActivity extends AppCompatActivity {
 
-    private TextView signUpTextView;
+    private EditText username,password;
+    private Button register;
+    private RequestQueue requestQueue;
+    private static final String URL = "http://192.168.1.24/DealWebApp/user_control.php";
+    private StringRequest request;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_login);
 
-        signUpTextView = (TextView) findViewById(R.id.signUpTextView);
-        signUpTextView.setOnClickListener(new OnClickListener() {
+        username = (EditText) findViewById(R.id.username);
+        password = (EditText) findViewById(R.id.password);
+        register = (Button) findViewById(R.id.sign_up);
+
+        requestQueue = Volley.newRequestQueue(this);
+
+        register.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Log.i("LoginActivity", "Sign Up Activity activated.");
-                // this is where you should start the signup Activity
-                RegisterActivity.this.startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+            public void onClick(View view) {
+
+                request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if(jsonObject.names().get(0).equals("success")){
+                                Toast.makeText(getApplicationContext(),"SUCCESS "+jsonObject.getString("success"),Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(),SavedListActivity.class));
+
+                            }else {
+                                Toast.makeText(getApplicationContext(), "Error" +jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        HashMap<String,String> hashMap = new HashMap<String, String>();
+                        hashMap.put("username",username.getText().toString());
+                        hashMap.put("password",password.getText().toString());
+
+                        return hashMap;
+                    }
+                };
+
+                requestQueue.add(request);
             }
         });
     }
-
-
 }

@@ -18,7 +18,7 @@ import android.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    //public boolean loggedIn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +73,14 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.action_saved_list) {
 
-            Intent registerIntent = new Intent(this,LoginActivity.class);
-            startActivity(registerIntent);
+            if(LoginActivity.loggedIn != true) {
+                Intent registerIntent = new Intent(this, LoginActivity.class);
+                startActivity(registerIntent);
+            }
+            else {
+                Intent registerIntent = new Intent(this, SavedListActivity.class);
+                startActivity(registerIntent);
+            }
 
         }
 
