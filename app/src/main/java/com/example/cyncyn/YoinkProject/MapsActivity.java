@@ -54,8 +54,8 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWi
     List<Marker> list = new ArrayList<>();
 
     private static final String TAG = "DealWebApp";                             //Name of application on XAMPP
-    //private static final String API_URL = "http://192.168.1.24:80/DealWebApp/api/";
-    private static final String API_URL = "http://www.yoink.netne.net/api/"; //Add in Local URL if in college or at home
+    private static final String API_URL = "http://192.168.1.24:80/YoinkwebApp/api/";
+    //private static final String API_URL = "http://www.yoink.netne.net/api/"; //Add in Local URL if in college or at home
     private List<Deal> mDeals;
     String categoryName = "";
 
@@ -317,7 +317,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWi
                 for (int i = 0; i != jsonArray.length(); i++) {
                     jsonObject = jsonArray.getJSONObject(i);
                     Marker marker = mMap.addMarker(new MarkerOptions()
-                                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.yoink_trans_logo))
+                                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher))
                                     .title(jsonObject.getString("business_name"))
                                     .snippet(jsonObject.getString("deal_description"))
                                     .position(new LatLng(
@@ -332,10 +332,11 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWi
                         String description = jsonObject.getString("deal_description");
                         String category = jsonObject.getString("deal_category");
                         String businessName = jsonObject.getString("business_name");
+                        String businessAddress = jsonObject.getString("business_address");
                         double latitude = jsonObject.getDouble("business_lat");
                         double longitude = jsonObject.getDouble("business_long");
 
-                        deal = new Deal(id, description, category, businessName, latitude, longitude);
+                        deal = new Deal(id, description, category, businessName, businessAddress, latitude, longitude);
 
                         mDeals.add(deal);
 
@@ -344,11 +345,8 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWi
                         categoryName = mDeals.get(t).getCategory();
                     }
 
-
                     list.add(marker);
-
-
-                    Toast.makeText(MapsActivity.this,categoryName, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MapsActivity.this,categoryName, Toast.LENGTH_SHORT).show();
 
 
 

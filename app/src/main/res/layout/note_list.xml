@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="match_parent"
+    android:padding="10dp">
 
     <ImageView
         android:id="@+id/imageLogoIcon"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_marginTop="5dp"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@mipmap/yoink_trans_logo" />
 
     <TextView
         android:id="@+id/list_item_deal_business_textView"
@@ -22,7 +23,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="3dp"
         android:text="Dummy Text" />
-
 
     <TextView
         android:id="@+id/list_item_deal_cat_textView"
@@ -49,3 +49,6 @@
         android:text="Dummy Text" />
 
 </RelativeLayout>
+
+
+

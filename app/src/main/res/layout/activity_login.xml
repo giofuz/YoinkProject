@@ -1,30 +1,148 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:gravity="center_horizontal"
-    android:orientation="vertical"  tools:context=".LoginActivity">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimary"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    android:visibility="visible">
 
+        <LinearLayout
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="26dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:weightSum="1"
+            tools:context=".LoginActivity">
 
-    <EditText android:id="@+id/username" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:hint="Username"
-        android:inputType="text" android:maxLines="1"
-        android:singleLine="true" />
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yoink"
+                android:paddingBottom="30dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.32"
+            android:textSize="20dp"
+            android:textColor="@color/white" />
 
-    <EditText android:id="@+id/password" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:hint="@string/prompt_password"
-        android:inputType="textPassword"
-        android:maxLines="1" android:singleLine="true" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextUsername"
+                android:textColor="@color/white"
+                android:hint="Username"
+                android:textCursorDrawable="@color/white"
+                android:textColorHint="#d2d2d2" />
 
-    <Button android:id="@+id/sign_in"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" android:text="Login"
-        />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:id="@+id/editTextPassword"
+                android:textColor="@color/white"
+                android:textCursorDrawable="@color/white"
+                android:textColorHint="#d2d2d2"
+                android:hint="Password" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign up"
-        android:id="@+id/signUp_btn"
-        android:layout_gravity="center_horizontal"
-        android:onClick="btnClickHandler"/>
+            <Button
+                android:id="@+id/buttonLogin"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/action_bar"
+                android:textColor="@color/white"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="10dp"
+                android:padding="12dp"
+                android:text="Login"/>
 
-</LinearLayout>
+            <Button
+                android:id="@+id/Register_btn"
+                android:layout_width="335dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="24dp"
+                android:padding="12dp"
+                android:text="Register"
+                android:layout_gravity="center_horizontal"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:background="@color/primary"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:fitsSystemWindows="true">-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingTop="56dp"-->
+        <!--android:paddingLeft="24dp"-->
+        <!--android:paddingRight="24dp"-->
+        <!--android:weightSum="1">-->
+
+        <!--<ImageView-->
+            <!--android:background="@mipmap/yoink_trans_logo"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="150dp" />-->
+
+        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="Yoink"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_gravity="center_horizontal"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_weight="0.28"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textSize="20dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textColor="@color/white"/>&ndash;&gt;-->
+
+        <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/editText"-->
+            <!--android:layout_weight="0.28"-->
+            <!--android:hint="Username"-->
+            <!--android:textColorHint="#d2d2d2"-->
+            <!--android:textColor="@color/white" />-->
+
+        <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/editTextPassword"-->
+            <!--android:layout_weight="0.28"-->
+            <!--android:hint="Password"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textColorHint="#d2d2d2" />-->
+
+        <!--<android.support.v7.widget.AppCompatButton-->
+            <!--android:id="@+id/buttonLogin"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/action_bar"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:layout_marginTop="24dp"-->
+            <!--android:layout_marginBottom="24dp"-->
+            <!--android:padding="12dp"-->
+            <!--android:text="Login"/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/linkSignup"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="24dp"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:text="No account yet? Create one"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="16dip"/>-->
+
+    <!--</LinearLayout>-->
+<!--</ScrollView>-->

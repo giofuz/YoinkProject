@@ -1,68 +1,67 @@
 package com.example.cyncyn.YoinkProject;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
-/**
- * Created by Giovanni Fusciardi & Luke Doolin for 3rd year project
- IADT multimedia programming on 08/01/16.
- */
-public class SavedListActivity extends AppCompatActivity {
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
-    private TextView textView;
+public class SavedListActivity extends AppCompatActivity implements View.OnClickListener {
+
+    //public static final String JSON_URL = "http://simplifiedcoding.16mb.com/UserRegistration/json.php";
+    public static final String JSON_URL = "http://192.168.1.24:80/DealWebApp/read_deals.php";
+
+    private Button buttonGet;
+
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_list);
 
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
-
-        if (fragment == null) {
-            fragment = new DealListFragment();
-            fm.beginTransaction()
-                    .add(R.id.fragmentContainer, fragment)
-                    .commit();
-        }
-
-        //textView = (TextView) findViewById(R.id.textView3);
-        //Intent intent = getIntent();
-        //textView.setText("Welcome " + LoginActivity.KEY_USERNAME);
+        buttonGet = (Button) findViewById(R.id.buttonGet);
+        buttonGet.setOnClickListener(this);
+        listView = (ListView) findViewById(R.id.listView);
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_saved_list, menu);
-        return true;
+    private void sendRequest(){
 
-//        MenuInflater mif = getMenuInflater();
-//        mif.inflate(R.menu.menu_main, menu);
-//        return super.onCreateOptionsMenu(menu);
+        StringRequest stringRequest = new StringRequest(JSON_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        showJSON(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(SavedListActivity.this,error.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.saved_list_settings) {
-            Intent registerIntent = new Intent(this, MainActivity.class);
-            startActivity(registerIntent);
-            LoginActivity.loggedIn = false;
-        }
-
-        return super.onOptionsItemSelected(item);
+    private void showJSON(String json){
+        ParseJSON pj = new ParseJSON(json);
+        pj.parseJSON();
+        CustomList cl = new CustomList(this, ParseJSON.deal_id,ParseJSON.deal_descrp,ParseJSON.deal_cat);
+        listView.setAdapter(cl);
     }
 
-
+    @Override
+    public void onClick(View v) {
+        sendRequest();
+    }
 }
+

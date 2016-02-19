@@ -4,9 +4,11 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowBackground">@color/white</item>
-        <item name="android:colorPrimaryDark">@color/common_action_bar_splitter</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:actionBarStyle">@color/action_bar</item>
         <item name="android:actionBarTabBarStyle">@color/action_bar</item>
+        <item name="android:textCursorDrawable">@color/white</item>
         <item name="android:textColor">@color/black_text</item>
         <item name="android:fontFamily" tools:targetApi="jelly_bean">Arial</item>
     </style>

@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DealListFragment extends ListFragment {
-    //private static final String API_URL = "http://192.168.1.24:80/DealWebApp/api/";
-    private final String API_URL = "http://www.yoink.netne.net/api/";
+    private static final String API_URL = "http://192.168.1.24:80/YoinkWebApp/api/";
+    //private final String API_URL = "http://www.yoink.netne.net/api/";
     private final String TAG = "DealWebApp";
 
     private List<Deal> mDeals;
@@ -101,10 +101,11 @@ public class DealListFragment extends ListFragment {
                         String description = jsonObject.getString("deal_description");
                         String category = jsonObject.getString("deal_category");
                         String businessName = jsonObject.getString("business_name");
+                        String businessAddress = jsonObject.getString("business_address");
                         double latitude = jsonObject.getDouble("business_lat");
                         double longitude = jsonObject.getDouble("business_long");
 
-                        deal = new Deal(id, description, category, businessName, latitude, longitude);
+                        deal = new Deal(id, description, category, businessName, businessAddress, latitude, longitude);
 
                         mDeals.add(deal);
                     }

@@ -13,7 +13,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Descrpt_title_label" />
+        android:text="@string/Descrpt_title_label"
+        android:textSize="15dp"
+        android:textIsSelectable="true" />
 
     <TextView
         android:id="@+id/deal_desc_editText"
@@ -22,13 +24,16 @@
         android:hint="@string/descrpt_hint"
         android:paddingBottom="@dimen/activity_field_margin2"
         android:inputType="none"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:textSize="15dp"
+        android:textIsSelectable="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/activity_field_margin2"
-        android:text="@string/category_label" />
+        android:text="@string/category_label"
+        android:textSize="15dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +48,8 @@
             android:hint="@string/category_hint"
             android:paddingBottom="@dimen/activity_field_margin2"
             android:inputType="none"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textSize="15dp" />
 
 
     </LinearLayout>
@@ -54,7 +60,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/activity_field_margin2"
-        android:text="@string/biz_hint" />
+        android:text="@string/biz_hint"
+        android:textSize="15dp" />
 
 
     <TextView
@@ -63,8 +70,30 @@
         android:layout_height="wrap_content"
         android:hint="@string/biz_hint"
         android:paddingBottom="@dimen/activity_field_margin2"
-        android:inputType="numberDecimal"
-        android:singleLine="true" />
+        android:inputType="none"
+        android:singleLine="true"
+        android:textSize="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/activity_field_margin2"
+        android:text="@string/biz_add"
+        android:textSize="15dp" />
+
+
+    <TextView
+        android:id="@+id/biz_add_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/biz_add"
+        android:paddingBottom="@dimen/activity_field_margin2"
+        android:inputType="none"
+        android:singleLine="true"
+        android:textSize="15dp"
+        android:textIsSelectable="true" />
+
+
 
 
 </LinearLayout>

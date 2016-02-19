@@ -8,7 +8,7 @@
     <at.markushi.ui.CircleButton
         android:layout_width="64dp"
         android:layout_height="64dp"
-        app:cb_color="@color/primary"
+        app:cb_color="@color/colorPrimary"
         app:cb_pressedRingWidth="8dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"

@@ -46,6 +46,7 @@ public class DealListAdapter extends ArrayAdapter<Deal>
         		R.id.list_item_deal_business_textView);
         authorTextView.setText(d.getBusinessName());
 
+
         return convertView;
 	}
 }

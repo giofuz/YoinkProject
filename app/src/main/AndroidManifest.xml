@@ -11,7 +11,7 @@
         android:name="com.example.cyncyn.YoinkProject.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
 
-
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -27,13 +27,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/yoink_trans_logo"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".RegisterActivity"
-            android:configChanges="orientation|screenSize"
-            android:label="@string/course_name" >
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -41,6 +40,7 @@
 
         <activity
             android:name=".MainActivity"
+            android:label="@string/deal_name"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -92,7 +92,7 @@
         <activity
             android:name=".DealActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/course_name" >
+            android:label="@string/deal_name" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -100,11 +100,10 @@
 
         <activity
             android:name=".LoginActivity"
-            android:configChanges="orientation|screenSize"
-            android:label="@string/course_name" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+            android:configChanges="orientation|screenSize">
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value=".MainActivity" />-->
         </activity>
     </application>
 

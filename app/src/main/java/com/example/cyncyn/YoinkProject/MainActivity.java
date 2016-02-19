@@ -18,7 +18,7 @@ import android.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 
-    //public boolean loggedIn = false;
+    public static String KEY_USERNAME="username";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,31 +59,19 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent registerIntent = new Intent(this, SettingsActivity.class);
-            startActivity(registerIntent);
-        }
-
         if (id == R.id.action_map) {
 
-            Intent registerIntent = new Intent(this, MapsActivity.class);
-            startActivity(registerIntent);
+            Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
 
         }
 
-        if (id == R.id.action_saved_list) {
+        if (id == R.id.action_delete_all) {
 
-            if(LoginActivity.loggedIn != true) {
-                Intent registerIntent = new Intent(this, LoginActivity.class);
-                startActivity(registerIntent);
-            }
-            else {
-                Intent registerIntent = new Intent(this, SavedListActivity.class);
-                startActivity(registerIntent);
-            }
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
 
         }
-
         return super.onOptionsItemSelected(item);
     }
 

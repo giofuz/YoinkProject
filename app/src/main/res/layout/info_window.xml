@@ -8,7 +8,7 @@
         android:id="@+id/imageView1"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@mipmap/yoink_trans_logo"
+        android:src="@mipmap/ic_launcher"
         android:contentDescription="@string/map_info" />
 
     <LinearLayout

@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.List;
 
 public class DealFragment extends Fragment {
@@ -18,7 +20,8 @@ public class DealFragment extends Fragment {
     private TextView mDescrptField;
     private TextView mCategoryField;
     private TextView mBusinessName;
-    private Deal mDeal;
+    private TextView mBusinessAddress;
+    public Deal mDeal;
 
     public static DealFragment newInstance(int dealId) {
         DealFragment fragment = new DealFragment();
@@ -55,13 +58,16 @@ public class DealFragment extends Fragment {
         mDescrptField = (TextView) fragment.findViewById(R.id.deal_desc_editText);
         mCategoryField = (TextView) fragment.findViewById(R.id.deal_cat_editText);
         mBusinessName = (TextView) fragment.findViewById(R.id.deal_biz_editText);
+        mBusinessAddress = (TextView) fragment.findViewById(R.id.biz_add_editText);
 
         if (mDeal != null) {
             mDescrptField.setText(mDeal.getDescription());
             mCategoryField.setText(mDeal.getCategory());
             mBusinessName.setText(mDeal.getBusinessName());
+            mBusinessAddress.setText(mDeal.getBusinessAddress());
         }
 
         return fragment;
+
     }
 }
