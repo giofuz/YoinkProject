@@ -25,6 +25,7 @@ public class Deal {
         this(-1, description, category, businessName, businessAddress, latitude, longitude);
     }
 
+	//This is a test comment for github
 	public int getId() { return mId; }
 	public String getDescription() { return mDescription; }
 	public String getCategory() { return mCategory; }
